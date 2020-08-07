@@ -1,16 +1,10 @@
+import math
+
+
 def solution(A):
-    leader_indexes = []
-    numbers_processed = []
-    overall_leader = None
-    i = 0
-    while i < len(A):
-        if A[i] not in numbers_processed:
-            if is_leader(A, A[i]):
-                leader_indexes = [i for i, x in enumerate(A) if x == A[i]]
-                overall_leader = A[i]
-                break
-            numbers_processed.append(A[i])
-        i += 1
+    overall_leader = find_leader(A)
+    # Find leader's indexes in the original array
+    leader_indexes = [i for i, x in enumerate(A) if x == overall_leader]
 
     equileader_count = 0
 
@@ -23,6 +17,13 @@ def solution(A):
     return equileader_count
 
 
+def find_leader(numbers):
+    # Sort so we can find leader in O(NlogN). Python sorts in place, so we need to copy by value
+    B = numbers[:]
+    B.sort()
+    return B[math.floor(len(numbers)/2)]
+
+
 def is_leader(A, number):
     return A.count(number) > len(A) / 2
 
@@ -30,3 +31,4 @@ def is_leader(A, number):
 if __name__ == '__main__':
     print(solution([4, 3, 4, 4, 4, 2]))
     print(solution([1]))
+    print(solution([4, 4, 2, 5, 3, 4, 4, 4]))

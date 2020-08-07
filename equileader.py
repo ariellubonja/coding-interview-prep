@@ -1,16 +1,15 @@
 import math
+import random
 
 
 def solution(A):
     overall_leader = find_leader(A)
-    # Find leader's indexes in the original array
-    leader_indexes = [i for i, x in enumerate(A) if x == overall_leader]
 
     equileader_count = 0
 
-    for a in leader_indexes:
+    for a in range(len(A)):
         # A[0:a] doesn't include A[a]
-        if a < len(A) and is_leader(A[0:a + 1], overall_leader) and is_leader(A[a + 1:len(A)], overall_leader):
+        if is_leader(A[0:a + 1], overall_leader) and is_leader(A[a + 1:len(A)], overall_leader):
             # print(A[a + 1:len(A)])
             equileader_count += 1
 
@@ -29,6 +28,10 @@ def is_leader(A, number):
 
 
 if __name__ == '__main__':
-    print(solution([4, 3, 4, 4, 4, 2]))
-    print(solution([1]))
-    print(solution([4, 4, 2, 5, 3, 4, 4, 4]))
+    # print(solution([4, 3, 4, 4, 4, 2]))
+    # print(solution([1]))
+    # print(solution([4, 4, 2, 5, 3, 4, 4, 4]))
+
+    g10000 = [4]*5001 + random.sample(range(100000), 4999)
+    random.shuffle(g10000)
+    print(solution(g10000))

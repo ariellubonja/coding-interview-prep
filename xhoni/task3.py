@@ -24,12 +24,17 @@ def solution(A, S):
     S_mean_count = 0
     while i < len(A):
         j = i + 1
+        # Save mean so it isn't calculated in full everytime
+        prev_mean = 0
+
         while j <= len(A):
-            if mean(A[i:j]) == S:
+            curr_mean = ((prev_mean*len(A[i:j-1])) + A[j-1]) / len(A[i:j])
+            if curr_mean == S:
                 S_mean_count += 1
                 if S_mean_count > 1000000000:
                     return 1000000000
             j += 1
+            prev_mean = curr_mean
         i += 1
 
     return S_mean_count
@@ -41,6 +46,5 @@ if __name__ == '__main__':
     print(solution([2,1,4], 3))
     print(solution([2], 2))
 
-    g1000 = [4] * 25001 + random.sample(range(100000), 24999)
-    random.shuffle(g1000)
+    g1000 = random.sample(range(1000000), 1500)
     print(solution(g1000, 100))

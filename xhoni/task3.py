@@ -15,36 +15,20 @@
 
 # So we need combination of all elems, whether they mean() = S
 # Not combinatorics, they are continuous subsets
-import random
-from statistics import mean
 
 
 def solution(A, S):
-    i = 0
-    S_mean_count = 0
-    while i < len(A):
-        j = i + 1
-        # Save mean so it isn't calculated in full everytime
-        prev_mean = 0
+    import itertools
 
-        while j <= len(A):
-            curr_mean = ((prev_mean*len(A[i:j-1])) + A[j-1]) / len(A[i:j])
-            if curr_mean == S:
-                S_mean_count += 1
-                if S_mean_count > 1000000000:
-                    return 1000000000
-            j += 1
-            prev_mean = curr_mean
-        i += 1
-
-    return S_mean_count
+    return sum([sum([1 for i, x in enumerate(gimi) if (x / (i+1)) == S]) for gimi in [list(itertools.accumulate(A[i:])) for i in range(len(A))]])
 
 
 if __name__ == '__main__':
+    import random
     print(solution([2,1,3], 2))
     print(solution([0,4,3,-1], 2))
     print(solution([2,1,4], 3))
     print(solution([2], 2))
 
-    g1000 = random.sample(range(1000000), 1500)
+    g1000 = random.sample(range(1000000), 10000)
     print(solution(g1000, 100))

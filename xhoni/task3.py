@@ -15,6 +15,7 @@
 
 # So we need combination of all elems, whether they mean() = S
 # Not combinatorics, they are continuous subsets
+import random
 from statistics import mean
 
 
@@ -38,3 +39,8 @@ if __name__ == '__main__':
     print(solution([2,1,3], 2))
     print(solution([0,4,3,-1], 2))
     print(solution([2,1,4], 3))
+    print(solution([2], 2))
+
+    g1000 = [4] * 25001 + random.sample(range(100000), 24999)
+    random.shuffle(g1000)
+    print(solution(g1000, 100))

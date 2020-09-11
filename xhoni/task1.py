@@ -20,28 +20,31 @@ def solution(T, R):
     digit_pos = [i for i in range(len((T[0]))) if T[0][i].isdigit()][0]
 
     # Find the number of test groups
-    digits = [int(c[digit_pos]) for c in T]
+    # digits = [int(c[digit_pos]) for c in T]
     # number_of_groups = max(digits)
 
     dict = {}
 
-    pos = 0
-    while pos < len(T):
-        if digits[pos] not in dict:
-            dict[digits[pos]] = [R[pos]]
+    T_pos = 0
+    # Populate dictionary
+    while T_pos < len(T):
+        if int(T[T_pos][digit_pos]) not in dict:
+            dict[int(T[T_pos][digit_pos])] = [R[T_pos]]
         else:
-            dict[digits[pos]].append(R[pos])
-        pos += 1
+            dict[int(T[T_pos][digit_pos])].append(R[T_pos])
+        T_pos += 1
 
     for k in dict.keys():
         for val in dict[k]:
             if val != "OK":
-                dict[k] = 0
+                dict[k] = False
                 break
-            dict[k] = 1
+            dict[k] = True
 
     score = 0
     score_per_group = int(100 / len(dict))
+
+    # score += []
 
     for val in dict.values():
         if val == 1:
@@ -81,6 +84,14 @@ if __name__ == '__main__':
                      "OK",
                      "OK",
                      "Runtime error",
+                     "OK"
+                     ]
+                   ))
+
+    print(solution(["codility1",
+                    ]
+                   ,
+                   [
                      "OK"
                      ]
                    ))

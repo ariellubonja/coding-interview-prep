@@ -25,10 +25,13 @@ def solution(A, S):
 
 if __name__ == '__main__':
     import random
-    print(solution([2,1,3], 2))
-    print(solution([0,4,3,-1], 2))
-    print(solution([2,1,4], 3))
-    print(solution([2], 2))
+    # print(solution([2,1,3], 2))
+    # print(solution([0,4,3,-1], 2))
+    # print(solution([2,1,4], 3))
+    # print(solution([2], 2))
+    #
+    # print("Laura: " + str(solution([2, 3, 9, 8, 7, 9, 1, 4, 9, 9, 8, 2, 8, 8, 1, 4, 4, 6, 7, 8, 8, 8, 0, 7, 8, 8, 6, 9, 6, 9, 0, 6, 8, 9, 4, 1, 1, 0, 6, 1, 1, 9, 4, 5, 9, 8, 9, 9, 1, 2, 4, 0, 9, 5, 7, 3, 6, 6, 7, 3, 5, 9, 7, 6, 4, 5, 0, 0, 2, 5, 1, 1, 7, 5, 4, 5, 8, 5, 8, 6, 1, 2, 1, 7, 4, 2, 9, 9, 4, 4, 8, 1, 4, 8, 8, 3, 8, 7, 7, 2], 5)))
 
-    g1000 = random.sample(range(1000000), 10000)
+    g1000 = random.choices(range(1000000), k=100000)
+    s = round(sum(g1000)/100000)
     print(solution(g1000, 100))

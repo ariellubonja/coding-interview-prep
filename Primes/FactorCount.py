@@ -23,6 +23,20 @@ def solution(N):
     return num_factors
 
 
+# They've made the observation that half the factors are <= sqrt(N)
+def codility_solution(N):
+    i = 1
+    num_factors = 0
+    while i * i < N:
+        if N % i == 0:
+            num_factors += 2
+        i += 1
+    if i * i == N:
+        num_factors += 1
+    return num_factors
+
+
 if __name__ == '__main__':
     print(solution(24))
     print(solution(4))
+    print(codility_solution(4))

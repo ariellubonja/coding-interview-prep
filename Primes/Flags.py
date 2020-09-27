@@ -20,7 +20,7 @@ def solution(A):
     #   This can be done in O(nr-of-peaks)
     flag_positions = [peaks[0]]
     max_flags = 1
-    for num_flags in range(len(peaks[1:]), 1, -1):
+    for num_flags in range(len(peaks), 1, -1):
         for peak in peaks[1:]:
             if peak - flag_positions[-1] >= num_flags:
                 flag_positions.append(peak)
@@ -35,6 +35,6 @@ def solution(A):
 
 
 if __name__ == '__main__':
-    # print(solution([1,5,3,4,3,4,1,2,3,4]))
-    # print(solution([1]))
+    print(solution([1,5,3,4,3,4,1,2,3,4,6,2]))
+    print(solution([1]))
     print(solution([0, 0, 0, 0, 0, 1, 0, 1, 0, 1]))

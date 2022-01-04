@@ -1,25 +1,19 @@
 # The line jumping problem
 
 def minimumBribes(q):
-    # sorted_q = sorted(q) # O(nlogn)
+    bribes = 0
 
-    chaos = 0
+    for i in range(len(q)):
+        if q[i] > i + 2 + 1: # since index is 0-based
+            print("Too chaotic")
+            return
 
-    for i in range(len(q)): # O(n^2). Could be too slow for most test cases
-        count_swaps = 0
-        # If any element coming after i is smaller than i, that means a swap has occurred.
-        # If there are more than 2 such elements, Too Chaotic
-        for j in range(i+1, len(q)):
-            if q[i] > q[j]: # Cannot have equal
-                count_swaps += 1
-                if count_swaps > 2:
-                    print("Too chaotic")
-                    return
+    for i in range(len(q)-1,0,-1):
+        for j in range(max(q[i]-2,0),i):
+            if q[j] > q[i]:
+                bribes += 1
 
-        chaos += count_swaps
-
-    print(chaos)
-
+    print(bribes)
 
 # # O(n^2)
 # def minimumBribes(q):

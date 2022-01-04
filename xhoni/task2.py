@@ -35,30 +35,51 @@
 
 
 # Laura, slow
+# def solution(A):
+#     # This doesnt speed up anything. len(A) is O (1)
+#     N = len(A)
+#     no_distinct = len(set(A))
+#     i = 0
+#     j= no_distinct -1
+#     current_hits = set(A[i:(j+1)])
+#     optimal = N
+#     while j < N:
+#         if len(current_hits) < no_distinct:
+#             j += 1
+#             if (j < N) and not(A[j] in current_hits):
+#                 current_hits.add(A[j])
+#         else:
+#             if A[j] == A[i]:
+#                 i += 1
+#             if((j-i+1) <= optimal):
+#                 optimal = j-i+1
+#                 # print("optimal", optimal)
+#             # this one's bad. I need to replace current_hits by a map. how many times each location has been visited
+#             if not(A[i] in A[(i+1):(j+1)]):
+#                 current_hits.remove(A[i])
+#             i += 1
+#         # print(i, j, current_hits)
+#     return optimal
+
+
 def solution(A):
-    N = len(A)
-    no_distinct = len(set(A))
-    i = 0
-    j= no_distinct -1
-    current_hits = set(A[i:(j+1)])
-    optimal = N
-    while j < N:
-        if len(current_hits) < no_distinct:
-            j += 1
-            if (j < N) and not(A[j] in current_hits):
-                current_hits.add(A[j])
-        else:
-            if A[j] == A[i]:
-                i += 1
-            if((j-i+1) <= optimal):
-                optimal = j-i+1
-                # print("optimal", optimal)
-            # this one's bad. I need to replace current_hits by a map. how many times each location has been visited
-            if not(A[i] in A[(i+1):(j+1)]):
-                current_hits.remove(A[i])
-            i += 1
-        # print(i, j, current_hits)
-    return optimal
+    need = {uni: 1 for uni in set(A)}
+    got = len(need)
+
+    cur_i = final_i = final_j = 0
+    for cur_j, num in enumerate(A, 1):
+        if need[num] > 0:
+            got -= 1
+        need[num] -= 1
+
+        if not got:
+            while cur_i < cur_j and need[A[cur_i]] < 0:
+                need[A[cur_i]] += 1
+                cur_i += 1
+
+            if not final_j or cur_j - cur_i <= final_j - final_i:
+                final_i, final_j = cur_i, cur_j
+    return final_j - final_i
 
 # optimum = shortest(A)
 
@@ -66,6 +87,7 @@ def solution(A):
 if __name__ == '__main__':
     import random
 
+    print("Should be: " + str(solution([7, 3, 7, 3, 1, 3, 4, 1])))
     print("Should be 3: " + str(solution([2,1,1,3,2,1,1,3])))
     print("Should be 6: " + str(solution([7,5,2,7,2,7,4,7])))
     print("Should be 3: " + str(solution([2,1,3])))

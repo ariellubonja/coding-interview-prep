@@ -20,7 +20,20 @@
 def solution(A, S):
     import itertools
 
-    return sum([sum([1 for i, x in enumerate(gimi) if (x / (i+1)) == S]) for gimi in [list(itertools.accumulate(A[i:])) for i in range(len(A))]])
+    # A = [2,1,3]
+    # S = 2
+    # tot_sum = [sum([1 for i, x in enumerate(A) if (x / (i+1)) == S] for gimi in [list(itertools.accumulate(A[i:])) for i in range(len(A))]]
+    tot_sum = [sum([1 for i, x in enumerate(gimi) if (x / (i+1)) == S]) for gimi in [list(itertools.accumulate(A[i:])) for i in range(len(A))]]
+    return tot_sum
+
+    # return sum([sum([1 for i, x in enumerate(gimi) if (x / (i+1)) == S]) for gimi in [list(itertools.accumulate(A[i:])) for i in range(len(A))]])
+
+
+# def solution(A, S):
+#     sum = 0
+#     if sum > 1000000000:
+#         return 1000000000
+#     return sum
 
 
 if __name__ == '__main__':

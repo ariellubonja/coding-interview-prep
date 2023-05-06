@@ -1,4 +1,4 @@
-from bisect import bisect_left, bisect_right
+from bisect import bisect_right
 
 
 def solution(A):
@@ -45,6 +45,9 @@ def solution(A):
 
         # Handle case when radius of current circle exceeds nr. of circles on its right
         # Circles on the left will be counted because we sorted
+
+    if n_intersections > 10000000: # 10 M
+        return -1 # Edge case defined by problem defn.
 
     return n_intersections
 

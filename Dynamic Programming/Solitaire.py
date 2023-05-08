@@ -13,16 +13,18 @@ from copy import deepcopy
 
 
 def solution(A):
-    a = solve_sequence(A, A[len(A) - 1])
-    if A[0] < 0:
-        a += A[0] # Need to add starting point. It wasn't added if negative
+    a = solve_sequence(A)
+    a += A[len(A) - 1]
+    # if A[0] < 0:
+    #     a += A[0] # Need to add starting point. It wasn't added if negative
     return a
 
 
 
 # TODO Add limit of 6-sided die jumps
-def solve_sequence(seq, current_sum):
+def solve_sequence(seq):
     # whether_to_add_curr + min(subsequence)
+    current_sum = 0
     if len(seq) == 0:
         return 0
     elif len(seq) == 1:
@@ -36,9 +38,12 @@ def solve_sequence(seq, current_sum):
 
         start_index += max(len(seq)-7, 0) # start_index doesn't correspond to position in A. Make it so
 
-        subseq = seq[:start_index + 1]
+        if len(seq) <= 7:
+            subseq = seq[:start_index]
+        else:
+            subseq = seq[:start_index + 1]
 
-        current_sum += solve_sequence(subseq, current_sum)
+        current_sum += solve_sequence(subseq)#, current_sum)
 
     return current_sum
 
@@ -72,15 +77,9 @@ def solve_6_subseq(seq):
     return min(argmaxes), prevSum # Max Sum and starting location
 
 
-
-
-
-# https://stackoverflow.com/questions/16945518/finding-the-index-of-the-value-which-is-the-min-or-max-in-python
-def argmax(iterable):
-    return max(enumerate(iterable), key=lambda x: x[1])[0]
-
-
 if __name__ == '__main__':
     # assert solution([1, -2, 0, 9, -1, -2]) == 8
     # assert solution([-4, -10, -7]) == -11
-    assert solution([0, -4, -5, -2, -7, -9, -3, -10]) == -12
+    # assert solution([0, -4, -5, -2, -7, -9, -3, -10]) == -12
+    # assert solution([1,2,3,4,5,6,7,8,9,10,11,12]) == 78
+    assert solution([-1, -2, -3, -4, -5, -6, -7, -8, -9, -10, -11, -12]) == -19

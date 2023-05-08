@@ -21,10 +21,38 @@ def solution(A):
     max_sequence = []
 
     i = len(A)
+    max_sum = 0
     while i != 0:
-        current_seq = A[i-7, i]
+        start = max(i-7, 0)
+        current_seq = A[start:i]
 
-        max_sequence.append(solve_7_seq(current_seq))
+        sol_seq, seq_sum = solve_7_seq(A, current_seq)
+        max_sequence.insert(0, sol_seq) # Insert list at start of current
+        i = sol_seq[0]
+        max_sum += seq_sum
 
 
-def solve_7_seq(seq):
+    return max_sum
+
+
+def solve_7_seq(A, seq):
+    # [1, -2, 0, 9, -1, -2]
+    # Sln: 0, 3, 2 - dice roll
+
+    sln_path = []
+    maxSum = 0
+    for i in range(len(seq) - 1):
+        # If number ahead is positive, add to solution
+        if A[i] > 0:
+            sln_path.append(i)
+            maxSum += A[i]
+
+    sln_path.append(len(seq) - 1)  # We need to get to the last element of the current sequence to "exit" the game
+
+    maxSum += A[len(seq) - 1]
+
+    return sln_path, maxSum
+
+
+if __name__ == '__main__':
+    assert solution([1, -2, 0, 9, -1, -2]) == 8

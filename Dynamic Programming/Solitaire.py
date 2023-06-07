@@ -12,6 +12,18 @@
 from copy import deepcopy
 
 
+# ChatGPT solution
+# def solution(A):
+#     N = len(A)
+#     dp = [float('-inf')] * N
+#     dp[N-1] = A[N-1]
+#     for i in range(N-2, -1, -1):
+#         for j in range(i+1, min(i+7, N)):
+#             dp[i] = max(dp[i], dp[j] + A[i])
+#     return dp[0]
+
+
+
 def solution(A):
     a = solve_sequence(A)
     a += A[len(A) - 1]
@@ -78,8 +90,8 @@ def solve_6_subseq(seq):
 
 
 if __name__ == '__main__':
-    # assert solution([1, -2, 0, 9, -1, -2]) == 8
-    # assert solution([-4, -10, -7]) == -11
-    # assert solution([0, -4, -5, -2, -7, -9, -3, -10]) == -12
-    # assert solution([1,2,3,4,5,6,7,8,9,10,11,12]) == 78
+    assert solution([1, -2, 0, 9, -1, -2]) == 8
+    assert solution([-4, -10, -7]) == -11
+    assert solution([0, -4, -5, -2, -7, -9, -3, -10]) == -12
+    assert solution([1,2,3,4,5,6,7,8,9,10,11,12]) == 78
     assert solution([-1, -2, -3, -4, -5, -6, -7, -8, -9, -10, -11, -12]) == -19

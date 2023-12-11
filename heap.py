@@ -96,8 +96,7 @@ def maxHeapify(A, root):
 		largest = left
 
 	if right < len(A) and A[right] > A[left] and right < heaped: # Check if right is not out-of-bounds
-		if largest == left and A[right] > A[left]:
-			largest = right
+		largest = right
 
 	# Swap w/ the largest element
 	A[root] = A[largest]  # No effect if root is largest
@@ -118,4 +117,5 @@ def maxHeapify(A, root):
 
 
 if __name__ == '__main__':
-	print(heapSort([2,-3,1,-2,5, 10]))
+	# print(heapSort([2,-3,1,-2,5, 10]))
+	print(heapSort([-3,-4,-11,-15,0,13]))

@@ -11,11 +11,12 @@ def heapSort(A):
 	# So far, we have a Heap, but Array is not sorted in the original sense
 
 	# I don't get why we need the rest
+	global heaped
 	heaped = len(A)
-	for i in range(len(A), 1, -1):
+	for i in range(len(A)-1, 0, -1):
 		tmp = A[0]
-		A[0] = A[len(A)-1]
-		A[len(A)-1] = tmp
+		A[0] = A[i]
+		A[i] = tmp
 
 		heaped -= 1
 
@@ -27,6 +28,8 @@ def heapSort(A):
 def buildHeap(A):
 	# TODO I need to keep track of what is sorted and what isn't
 
+	global heaped
+	heaped = len(A) # Disable heaped section - this is useful when Sorting
 	# Go over parents in the tree and heapify
 	for i in range(int(len(A) / 2)-1, -1, -1):
 		maxHeapify(A, i) # 1st pass correct (i=2)
@@ -40,8 +43,6 @@ def mergeHeaps():
 	# Merge first 2, then merge that w/ 3rd (methinks)
 
 	raise NotImplementedError
-
-	pass
 
 
 # [6, 4, 5,2,3,1, 0, -3, 1, 1]
@@ -73,8 +74,8 @@ def insert():
 
 
 def maxHeapify(A, root):
-	if len(A) <= 1:
-		return
+	# if len(A) <= 1: # This check is useless. A doesn't shrink as recursion progresses
+	# 	return
 	# heaped = len(A) # At the start, A is unsorted. How to keep track?
 	left = getChild(root, 'left')
 	right = getChild(root, 'right')
@@ -90,10 +91,11 @@ def maxHeapify(A, root):
 	largest = root
 	old_root = A[root]
 
-	if A[left] > A[largest]:
+	# everything that is unheaped is sorted
+	if A[left] > A[largest] and left < heaped:
 		largest = left
 
-	if right < len(A) and A[right] > A[left]: # Check if right is not out-of-bounds
+	if right < len(A) and A[right] > A[left] and right < heaped: # Check if right is not out-of-bounds
 		if largest == left and A[right] > A[left]:
 			largest = right
 

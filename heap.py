@@ -4,12 +4,32 @@
 
 heaped = 1 # 1st element is sorted by default
 
+
+def heapSort(A):
+	buildHeap(A)
+
+	# So far, we have a Heap, but Array is not sorted in the original sense
+
+	# I don't get why we need the rest
+	heaped = len(A)
+	for i in range(len(A), 1, -1):
+		tmp = A[0]
+		A[0] = A[len(A)-1]
+		A[len(A)-1] = tmp
+
+		heaped -= 1
+
+		maxHeapify(A, 0)
+
+	return A
+
 # TODO what does this do?
-def heapify(A):
+def buildHeap(A):
 	# TODO I need to keep track of what is sorted and what isn't
 
-	maxHeapify(A, 0)
-	return A
+	# Go over parents in the tree and heapify
+	for i in range(int(len(A) / 2)-1, -1, -1):
+		maxHeapify(A, i) # 1st pass correct (i=2)
 
 
 def mergeHeaps():
@@ -96,4 +116,4 @@ def maxHeapify(A, root):
 
 
 if __name__ == '__main__':
-	print(heapify([2,-3,1,-2,5, 10]))
+	print(heapSort([2,-3,1,-2,5, 10]))

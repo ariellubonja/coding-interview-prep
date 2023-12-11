@@ -119,3 +119,9 @@ def maxHeapify(A, root):
 if __name__ == '__main__':
 	# print(heapSort([2,-3,1,-2,5, 10]))
 	print(heapSort([-3,-4,-11,-15,0,13]))
+	print(heapSort([]))
+	print(heapSort([52]))
+	print(heapSort([10, 9, 8, 7, 6, 5, 4, 3, 2, 1]))
+	print(heapSort([7, 7, 7, 7, 7, 7, 7, 7, 7, 7]))
+	print(heapSort(list(range(-1000, 1000))))
+

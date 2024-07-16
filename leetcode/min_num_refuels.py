@@ -64,8 +64,8 @@ if __name__ == '__main__':
 
     # print(sln.minRefuelStops(target=100, startFuel=50, stations=[[25, 25], [50, 50]]))
 
-    print(sln.minRefuelStops(target = 100, startFuel = 10, stations = [[10,60],[20,30],[30,30],[60,40]]))
+    # print(sln.minRefuelStops(target = 100, startFuel = 10, stations = [[10,60],[20,30],[30,30],[60,40]]))
 
     # print(sln.minRefuelStops(target=100, startFuel=25, stations=[[25,25],[50,25],[75,25]]))
 
-    # print(sln.minRefuelStops(target=1000, startFuel=299, stations=[[42,39],[132,236],[166,142],[434,7],[462,80],[518,103],[545,209],[656,104],[769,137],[811,67]]))
+    print(sln.minRefuelStops(target=1000, startFuel=299, stations=[[42,39],[132,236],[166,142],[434,7],[462,80],[518,103],[545,209],[656,104],[769,137],[811,67]]))
